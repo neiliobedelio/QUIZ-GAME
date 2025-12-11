@@ -1,0 +1,7 @@
+{
+  "name": "Birthday Know-It-All",
+  "description": "A birthday quiz game to test how well friends know the birthday person, featuring a Gemini-powered AI co-host.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
