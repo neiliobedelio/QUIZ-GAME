@@ -1,38 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Birthday Know-It-All</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      /* Custom utility for 3D card flip */
-      .perspective-1000 {
-        perspective: 1000px;
-      }
-      .transform-style-3d {
-        transform-style: preserve-3d;
-      }
-      .backface-hidden {
-        backface-visibility: hidden;
-      }
-      .rotate-y-180 {
-        transform: rotateY(180deg);
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.2/",
-    "react": "https://esm.sh/react@^19.2.2",
-    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.560.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.2/"
-  }
-}
-</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Defeat The Mighty Lucha Cabra!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-  <body class="bg-slate-50 text-slate-900 h-screen w-screen overflow-hidden">
-    <div id="root" class="h-full w-full"></div>
-  </body>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <div id="score">SCORE: 0</div>
+            <div id="life-container">
+                <div id="life-label">LIFE</div>
+                <div id="life-bar-bg">
+                    <div id="life-bar-fill"></div>
+                </div>
+            </div>
+            <div id="level">LEVEL: 1</div>
+        </div>
+        <div id="instruction-screen" class="screen active">
+            <h1>HOW TO PLAY</h1>
+            <div class="instruction-list">
+                <p><span class="highlight">HOW TO PLAY:</span>Use the spacebar to shoot bricks past the LUCHA CABRA!
+                    Drag or
+                    use keyboard arrows to move.</p>
+                <div class="instruction-item">
+                    <canvas id="preview-player" class="preview-canvas" width="40" height="40"></canvas>
+                    <p><span class="highlight">YOU:</span> "Rapido" the roadrunner is ready to improve Pueblo Viejo,
+                        brick by brick. Don’t forget your hard hat—safety first!</p>
+                </div>
+                <div class="instruction-item">
+                    <canvas id="preview-boss" class="preview-canvas" width="40" height="40"></canvas>
+                    <p><span class="highlight">LUCHA CABRA:</span> A luchador mask-wearing chupacabra, aka Lucha Cabra,
+                        is challenging your progress throughout the process. Booooo, Lucha!</p>
+                </div>
+                <p><span class="highlight">BRICKS:</span> Armed with a never-ending supply of bricks, help improve
+                    Pueblo Viejo by hurtling your building blocks.</p>
+                <p><span class="highlight">POWER UPS:</span> Collect the golden $ to earn extra points and blue + to
+                    restore Rapido's health.</p>
+                <p><span class="highlight">GOAL:</span> Throw your bricks past the Lucha Cabra to restore and improve
+                    Pueblo Viejo. The legendary Lucha Cabra will occasionally summon objects—such as saguaros and
+                    javelina—in an attempt to thwart your progress.</p>
+                <p><span class="highlight">PRO TIP:</span> Don’t hit the Lucha Cabra or it will send him into a frenzy!
+                </p>
+            </div>
+            <button id="instruction-btn">LET'S GET READY TO RUMBLE!</button>
+        </div>
+
+        <div id="start-screen" class="screen hidden">
+            <!-- 3D Arched Title -->
+            <!-- Title Image -->
+            <img src="title.png" id="main-title" alt="Lucha Cabra"
+                style="width: 80%; max-width: 600px; height: auto; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;">
+            <p>TAP TO START!</p>
+            <p class="copyright">©2025 Gordley Group</p>
+        </div>
+
+        <div id="level-transition-screen" class="screen hidden">
+            <h1 class="blink">CONGRATS!!</h1>
+            <h2 id="next-level-text">LEVEL 2... BEGIN!</h2>
+        </div>
+
+        <div id="game-over-screen" class="screen hidden">
+            <h1 id="go-title">YOU LOST!</h1>
+            <p id="final-score">SCORE: 0</p>
+            <div id="end-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+                <button id="play-again-btn">Play Again</button>
+                <button id="plan-fun-btn" style="background-color: #2196F3;">Plan Something Fun<br>With Us!</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
 </html>
